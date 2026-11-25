@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1120" />
+  <title>PulseWatch · Uptime Monitoring</title>
+  <link rel="stylesheet" href="/style.css" />
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="PulseWatch home"><span class="brand-icon"><span></span></span><strong>PulseWatch</strong></a>
+      <div class="top-right"><span class="local-badge"><span class="live-pip"></span> LIVE MONITORING</span><span class="top-meta">BUILT WITH GO</span></div>
+    </header>
+
+    <main>
+      <div class="intro">
+        <div>
+          <div class="eyebrow">YOUR WEBSITE HEALTH, AT A GLANCE</div>
+          <h1>Stay ahead of downtime<span class="accent-dot">.</span></h1>
+          <p>Monitor websites automatically, track response times, and get notified when something goes offline or recovers.</p>
+        </div>
+        <a class="outline-action" href="#add-monitor"><span class="plus-mark">＋</span> Add a monitor</a>
+      </div>
+
+      <section class="stats" aria-label="Overview">
+        <div class="stat"><div class="stat-title">Total monitors <span class="stat-mini">▤</span></div><div class="stat-number" id="total-count">0</div><div class="stat-sub">Websites being tracked</div></div>
+        <div class="stat"><div class="stat-title">Operational <span class="stat-mini green">●</span></div><div class="stat-number" id="up-count">0</div><div class="stat-sub">Responding normally</div></div>
+        <div class="stat"><div class="stat-title">Down <span class="stat-mini red">●</span></div><div class="stat-number" id="down-count">0</div><div class="stat-sub">Confirmed offline</div></div>
+        <div class="stat"><div class="stat-title">Average uptime <span class="stat-mini">↗</span></div><div class="stat-number" id="uptime-value">—</div><div class="stat-sub">Based on all recorded checks</div></div>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel monitors-panel" aria-labelledby="monitors-heading">
+          <div class="section-head"><div><div class="section-label">OVERVIEW</div><h2 id="monitors-heading">Your monitors</h2></div><div class="refresh-status"><span class="refresh-dot"></span> Auto-refreshes every 5s</div></div>
+          <div id="monitor-list" class="monitor-list">
+            <div class="empty-state"><div class="empty-icon">⌁</div><h3>No monitors yet</h3><p>Add a website to begin tracking uptime automatically.</p></div>
+          </div>
+        </section>
+
+        <aside class="panel add-panel" id="add-monitor" aria-labelledby="add-heading">
+          <div class="section-label">NEW MONITOR</div>
+          <h2 id="add-heading">Monitor a website</h2>
+          <p class="panel-description">We'll check the website continuously and keep a record of its availability.</p>
+          <form id="add-form">
+            <label for="site-name">Monitor name</label>
+            <input id="site-name" name="name" type="text" maxlength="80" placeholder="e.g. My Portfolio" autocomplete="off" />
+            <label for="site-url">Website URL <span class="required">*</span></label>
+            <input id="site-url" name="url" type="url" placeholder="https://example.com" required />
+            <label for="site-interval">Check interval</label>
+            <div class="select-wrapper"><select id="site-interval" name="interval_seconds">
+              <option value="5">Every 5 seconds (demo)</option>
+              <option value="10">Every 10 seconds</option>
+              <option value="30" selected>Every 30 seconds</option>
+              <option value="60">Every 1 minute</option>
+              <option value="300">Every 5 minutes</option>
+            </select></div>
+            <button type="submit" class="primary-btn" id="add-button"><span>＋</span> Create monitor</button>
+          </form>
+          <div class="tip"><span class="tip-icon">ⓘ</span><span>Two consecutive failed checks are required before marking a site as <b>DOWN</b>, helping reduce false alarms.</span></div>
+        </aside>
+      </div>
+
+      <section class="panel activity-panel" aria-labelledby="activity-heading">
+        <div class="section-head"><div><div class="section-label">RECENT ACTIVITY</div><h2 id="activity-heading">Check history</h2></div><span class="muted-note">Latest 80 checks</span></div>
+        <div class="activity-wrap"><table><thead><tr><th>WEBSITE</th><th>RESULT</th><th>RESPONSE</th><th>TIME</th></tr></thead><tbody id="activity-body"><tr><td colspan="4" class="table-empty">No checks recorded yet.</td></tr></tbody></table></div>
+      </section>
+    </main>
+    <footer><span>PulseWatch · Web Technology Project · Powered by Go</span><span>Local demo · v1.0</span></footer>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
